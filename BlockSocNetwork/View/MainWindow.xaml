@@ -28,30 +28,35 @@
             <TextBlock TextWrapping="WrapWithOverflow" Text="Статус: "/>
             <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Path=Status}"/>
         </WrapPanel>
-        <CheckBox Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Margin="20 0">
+        <CheckBox Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Margin="20 0" Checked="checkboxTime_Checked" 
+                  Unchecked="checkboxTime_Unchecked" IsChecked="True">
             <TextBlock TextWrapping="WrapWithOverflow" Text="? подряд"/>
         </CheckBox>
         <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" VerticalAlignment="Center" Margin="20 0" >
-            <TextBlock TextWrapping="WrapWithOverflow" Text="Максимальное время  "/>
-            <TextBox Width="40"/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="Максимальное время * "/>
+            <TextBox Width="60" Text="{Binding Path=MaxTime, Mode=TwoWay}"/>
             <TextBlock Text="  минут."/>
         </WrapPanel>
         <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" VerticalAlignment="Center" Margin="20 0">
-            <TextBlock TextWrapping="WrapWithOverflow" Text="Время блокировки  "/>
-            <TextBox Width="40"/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="Время блокировки * "/>
+            <TextBox Width="60" Text="{Binding Path=BlockTime, Mode=TwoWay}"/>
             <TextBlock Text="  минут."/>
         </WrapPanel>
-        <CheckBox Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" Margin="20 0">
+        <CheckBox Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" Margin="20 0" Checked="checkboxDayTime_Checked"
+                  Unchecked="checkboxDayTime_Unchecked" IsChecked="True">
             <TextBlock Text="? в сутки"/>
         </CheckBox>
         <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" VerticalAlignment="Center" Margin="20 0">
-            <TextBlock TextWrapping="WrapWithOverflow" Text="Максимальное время в сутки  "/>
-            <TextBox Width="40"/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="Максимальное время в сутки * "/>
+            <TextBox Width="60" Text="{Binding Path=MaxDayTime, Mode=TwoWay}"/>
             <TextBlock Text="  минут."/>
         </WrapPanel>
         <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" VerticalAlignment="Center" Margin="20 0">
             <TextBlock TextWrapping="WrapWithOverflow" Text="Время блокировки - до конца суток."/>
         </Label>
-        <Button Grid.Column="2" Grid.Row="7" Content="Изменить" Width="90" Height="30" /> 
+        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20 5">
+            <TextBlock FontSize="10" TextWrapping="WrapWithOverflow" Text="* Введите время в формате 00:00:00"/>
+        </Label>
+        <Button Grid.Column="2" Grid.Row="7" Content="Изменить" Width="90" Height="30" Command="{Binding CommandChangeSetting}"/> 
     </Grid>
 </Window>

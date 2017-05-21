@@ -29,5 +29,25 @@ namespace BlockSocNetwork
         {
 
         }
+
+        public void checkboxTime_Checked(object sender, RoutedEventArgs e)
+        {
+            MainCode.isCheckedTime = true;
+        }
+
+        public void checkboxTime_Unchecked(object sender, RoutedEventArgs e)
+        {
+            MainCode.isCheckedTime = false;
+        }
+
+        public void checkboxDayTime_Checked(object sender, RoutedEventArgs e)
+        {
+            MainCode.isCheckedDayTime = true;
+        }
+
+        public void checkboxDayTime_Unchecked(object sender, RoutedEventArgs e)
+        {
+            MainCode.isCheckedDayTime = false;
+        }
     }
 }
