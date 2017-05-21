@@ -1,0 +1,60 @@
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\BlockSocNetwork.exe.config
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\BlockSocNetwork.exe
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\BlockSocNetwork.pdb
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\App.g.cs
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork_MarkupCompile.cache
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork_MarkupCompile.lref
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.g.resources
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.Properties.Resources.resources
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csproj.GenerateResource.Cache
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.exe
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.pdb
+c:\users\alina\documents\visual studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csprojResolveAssemblyReference.cache
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\MainWindow.g.cs
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\MainWindow.baml
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\Interop.NetFwTypeLib.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csproj.ResolveComReference.cache
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Documents\Visual Studio 2015\Projects\BlockSocNetwork\BlockSocNetwork\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\BlockSocNetwork.exe.config
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\Interop.NetFwTypeLib.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csproj.ResolveComReference.cache
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.exe
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.pdb
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\BlockSocNetwork.exe
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\BlockSocNetwork.pdb
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\MainWindow.g.cs
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\App.g.cs
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork_MarkupCompile.cache
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork_MarkupCompile.lref
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\MainWindow.baml
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.g.resources
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.Properties.Resources.resources
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csproj.GenerateResource.Cache
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csprojResolveAssemblyReference.cache
