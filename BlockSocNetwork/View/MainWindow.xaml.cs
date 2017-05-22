@@ -62,10 +62,10 @@ namespace BlockSocNetwork
             Properties.Settings.Default.Save();
         }
 
-        //public void Window_Closing(object sender, CancelEventArgs e)
-        //{
-        //    MainCode code = new MainCode();
-        //    code.SaveSettings();           
-        //}
+        public void Window_Closing(object sender, CancelEventArgs e)
+        {
+            PasswordWindow passwordWindow = new PasswordWindow();
+            passwordWindow.Show();
+        }
     }
 }

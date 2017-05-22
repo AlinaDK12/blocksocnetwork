@@ -57,4 +57,5 @@ C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\Vi
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.g.resources
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.Properties.Resources.resources
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csproj.GenerateResource.Cache
-C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csprojResolveAssemblyReference.cache
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\PasswordWindow.g.cs
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\PasswordWindow.baml
