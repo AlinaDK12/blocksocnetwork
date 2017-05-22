@@ -9,28 +9,49 @@ namespace BlockSocNetwork
     public class Block
     {
         const string nameRule = "Block SocNetwork";
-        const string path = "websites.json";        
+        const string path = "websites.json";
+        INetFwRule currentFirewallRule;
+        INetFwRule2 firewallRule = (INetFwRule2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));      
+        INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
 
         public void SetBlock()
         {
-            INetFwRule2 firewallRule = (INetFwRule2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
+            try
+            {
+                currentFirewallRule = firewallPolicy.Rules.Item(nameRule);
+                if (!currentFirewallRule.Enabled)
+                {
+                    currentFirewallRule.Enabled = true;
+                }
+            }
+            catch
+            {
+                firewallRule.Name = nameRule;
+                firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
+                firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT;
+                firewallRule.Enabled = true;
+                firewallRule.InterfaceTypes = "All";
+                firewallRule.RemoteAddresses = GetAllRemoteAddresses();
 
-            firewallRule.Name = nameRule;
-            firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
-            firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT;
-            firewallRule.Enabled = true;
-            firewallRule.InterfaceTypes = "All";
-            firewallRule.RemoteAddresses = GetAllRemoteAddresses();           
-
-            INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
-            firewallPolicy.Rules.Add(firewallRule);
-            
+                firewallPolicy.Rules.Add(firewallRule);             
+            }                            
         }
 
         public void DeleteBlock()
         {
-            INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
-            firewallPolicy.Rules.Remove(nameRule);
+            try
+            {
+                currentFirewallRule = firewallPolicy.Rules.Item(nameRule);
+                if (currentFirewallRule.Enabled)
+                {
+                    currentFirewallRule.Enabled = false;
+                }
+            }
+            catch
+            {
+
+            }
+           // firewallPolicy.Rules.Remove(nameRule);
         }
 
         //получаем все IP для блокировки

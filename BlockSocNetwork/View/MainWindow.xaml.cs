@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace BlockSocNetwork
 {
@@ -23,6 +24,9 @@ namespace BlockSocNetwork
         public MainWindow()
         {
             InitializeComponent();
+
+            CheckTime.IsChecked = Properties.Settings.Default.isCheckedTime;
+            CheckDayTime.IsChecked = Properties.Settings.Default.isCheckedDayTime;
         }
 
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
@@ -33,21 +37,35 @@ namespace BlockSocNetwork
         public void checkboxTime_Checked(object sender, RoutedEventArgs e)
         {
             MainCode.isCheckedTime = true;
+            Properties.Settings.Default.isCheckedTime = true;
+            Properties.Settings.Default.Save();
         }
 
         public void checkboxTime_Unchecked(object sender, RoutedEventArgs e)
         {
             MainCode.isCheckedTime = false;
+            Properties.Settings.Default.isCheckedTime = false;
+            Properties.Settings.Default.Save();
         }
 
         public void checkboxDayTime_Checked(object sender, RoutedEventArgs e)
         {
             MainCode.isCheckedDayTime = true;
+            Properties.Settings.Default.isCheckedDayTime = true;
+            Properties.Settings.Default.Save();
         }
 
         public void checkboxDayTime_Unchecked(object sender, RoutedEventArgs e)
         {
             MainCode.isCheckedDayTime = false;
+            Properties.Settings.Default.isCheckedDayTime = false;
+            Properties.Settings.Default.Save();
         }
+
+        //public void Window_Closing(object sender, CancelEventArgs e)
+        //{
+        //    MainCode code = new MainCode();
+        //    code.SaveSettings();           
+        //}
     }
 }

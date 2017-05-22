@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows;
 using System.Net;
 using System.Net.Sockets;
-using System.Windows.Data;
 using System.Timers;
 using NetFwTypeLib;
-using Newtonsoft.Json;
 using System.IO;
 
 namespace BlockSocNetwork
@@ -36,7 +30,7 @@ namespace BlockSocNetwork
             //если файла с вебсайтами для блокировки не существует, то создается новый
             if (!File.Exists(pathWebsites))
             {
-                DefaultWebsites.Write();
+                defaultWebsites.Write();
             }
 
             //проверяется, включен ли брандмауэр и, если нет, то включается
@@ -49,56 +43,52 @@ namespace BlockSocNetwork
             GetHostIPAddress();
             //старт сниффера
             StartSniffer();
+            //проверяем при запуске, были ли уже заблокированы сайты
+            CheckBlock();
 
-            //таймер
+            //таймер для проверки заблокированного интервала времени
             timeBlock.Interval = 10000;
-            timeBlock.Enabled = true;
             timeBlock.Elapsed += new ElapsedEventHandler(CheckBlockTime);
-
-            timerCheckDate.Interval = 600000;
-            timerCheckDate.Enabled = true;
+            //таймер для проверки текущей даты
+            timerCheckDate.Interval = 60000;
             timerCheckDate.Elapsed += new ElapsedEventHandler(CheckDate);
-            timerCheckDate.Start();
+            if (!timerCheckDate.Enabled)
+                timerCheckDate.Start();
         }
 
         //---------------------------КОМАНДЫ-----------------------------
         public ICommand CommandChangeSetting { get; set; }
 
         //---------------------------ПОЛЯ-----------------------------
-        private Socket socket;                                     //прослушивающее устройство
-        private byte[] buffer;                                     //полученные пакеты
-        private string hostIPAddress;                              // IP прослушиваемого устройства
+        private Socket socket;                                                                              //прослушивающее устройство
+        private byte[] buffer;                                                                              //полученные пакеты
+        private string hostIPAddress;                                                                       // IP прослушиваемого устройства
                                    
         private string _status = "Социальные сети разблокированы!";
-        private string _maxTime = "00:03:00";
-        private string _maxDayTime = "00:05:00";
-        private string _blockTime = "00:03:00";
+        private string _maxTime = Properties.Settings.Default.maxTime;
+        private string _maxDayTime = Properties.Settings.Default.maxDayTime;
+        private string _blockTime = Properties.Settings.Default.blockTime;
 
-        private bool isBlocked = false;
-        private bool isDayBlocked = false;
-        public static bool isCheckedTime = true;
-        public static bool isCheckedDayTime = true;
+        public static bool isCheckedTime = Properties.Settings.Default.isCheckedTime;                       //checkbox блокировка по интервалу
+        public static bool isCheckedDayTime = Properties.Settings.Default.isCheckedDayTime;                 //checkbox блокировка на сутки
 
-        DefaultWebsites DefaultWebsites = new DefaultWebsites();   //запись ip вебсайтов для блокировки при первом запуске
+        DefaultWebsites defaultWebsites = new DefaultWebsites();                                            
         Block block = new Block();
         CheckRange checkRange = new CheckRange();
         
-        const string pathWebsites = "websites.json";               //файл с вебсайтами для блокировки
+        const string pathWebsites = "websites.json";                                                        //файл с вебсайтами для блокировки
 
-        private TimeSpan currentTime;
-        private TimeSpan startTime = TimeSpan.Parse("00:00:00");
-        private TimeSpan prevTime;
-        private TimeSpan difCurrPrevTime;
-        private TimeSpan difCurrStartTime;
-        private TimeSpan maxDifCurrPrevTime = TimeSpan.Parse("00:01:00");
-        private TimeSpan maxDifCurrStartTime = TimeSpan.Parse("00:03:00");
-        private TimeSpan blockTime = TimeSpan.Parse("00:03:00");
-        private TimeSpan stopBlockTime;
-        private TimeSpan totalDayTime;
-        private TimeSpan maxTotalDayTime = TimeSpan.Parse("00:05:00");
-        private string[] strStopBlockTime;
-        private string date = DateTime.Now.ToString().Split(' ')[0];
-        private string currDate = DateTime.Now.ToString().Split(' ')[0];
+        private TimeSpan currentTime;                                                                       //время текущего ip
+        private TimeSpan startTime = TimeSpan.Parse("00:00:00");                                            //время начала использования соц сетей
+        private TimeSpan prevTime;                                                                          //время предыдущего ip
+        private TimeSpan difCurrPrevTime;                                                                   //время м/у текущим и предыдущим ip
+        private TimeSpan difCurrStartTime;                                                                  //время м/у текущим и первым ip
+        private TimeSpan maxDifCurrPrevTime = TimeSpan.Parse("00:05:00");                                   //максимальное время м/у текущим и предыдущим ip 
+        private TimeSpan maxDifCurrStartTime = TimeSpan.Parse(Properties.Settings.Default.maxTime);         //максимальный допустимый интервал времени использования соц сетей
+        private TimeSpan blockTime = TimeSpan.Parse(Properties.Settings.Default.blockTime);                 //время блокировки соц сетей
+        private TimeSpan maxTotalDayTime = TimeSpan.Parse(Properties.Settings.Default.maxDayTime);          //максимальное время использования соц сетей в сутки
+        private string[] strStopBlockTime;                                                                  //время разблокировки соц сетей
+        private string currDate = DateTime.Now.ToString().Split(' ')[0];                                    //текущая дата
         
         Timer timeBlock = new Timer();
         Timer timerCheckDate = new Timer();
@@ -187,10 +177,10 @@ namespace BlockSocNetwork
             socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, OnReceive, null);
         }
 
-        //здесь начинается прослушивание хоста
+        //начало прослушивания хоста
         private void OnReceive(IAsyncResult ar)
         {
-           
+
             try
             {
                 int nReceived = socket.EndReceive(ar);
@@ -201,7 +191,7 @@ namespace BlockSocNetwork
             }
             catch
             {
-                MessageBox.Show("Error!");
+
             }
         }
      
@@ -210,7 +200,7 @@ namespace BlockSocNetwork
         {
             IPHeader ipHeader = new IPHeader(buf, len);   
 
-            if (!isBlocked)
+            if (!Properties.Settings.Default.isBlocked)
             {
                 if (checkRange.IsInRange(ipHeader.DestinationAddress) && (ipHeader.DestinationAddress.ToString() != "87.240.165.82"))
                 {
@@ -219,40 +209,43 @@ namespace BlockSocNetwork
                     {
                         startTime = currentTime;
                         prevTime = currentTime;
-                        stopBlockTime = currentTime + blockTime;
                     }
                     else
                     {
                         difCurrPrevTime = currentTime - prevTime;
+                        //блокировка на сутки
                         if (isCheckedDayTime)
                         {
-                            totalDayTime += difCurrPrevTime;
-                            if (totalDayTime >= maxTotalDayTime)
+                            Properties.Settings.Default.totalDayTime += difCurrPrevTime;
+                            if (Properties.Settings.Default.totalDayTime >= maxTotalDayTime)
                             {
                                 Status = "Социальные сети заблокированы до конца суток!";
-                                isBlocked = true;
-                                isDayBlocked = true;
+                                Properties.Settings.Default.isBlocked = true;
+                                Properties.Settings.Default.isDayBlocked = true;
+                                Properties.Settings.Default.Save();
                                 block.SetBlock();                               
                                 return;
                             }
                         }
+                        //блокировка по интервалам
                         if (difCurrPrevTime < maxDifCurrPrevTime && isCheckedTime)
                         {
                             difCurrStartTime = currentTime - startTime;
                             if (difCurrStartTime > maxDifCurrStartTime)
                             {
                                 Status = "Социальные сети заблокированы!";
-                                MessageBox.Show("Зашел");
+
                                 //если время для блокировки наступит на следующие сутки
                                 strStopBlockTime = (currentTime + blockTime).ToString().Split('.');
                                 if (strStopBlockTime.Length == 1)
-                                    stopBlockTime = TimeSpan.Parse(strStopBlockTime[0]);
+                                    Properties.Settings.Default.stopBlockTime = TimeSpan.Parse(strStopBlockTime[0]);
                                 else
-                                    stopBlockTime = TimeSpan.Parse(strStopBlockTime[1]);
+                                    Properties.Settings.Default.stopBlockTime = TimeSpan.Parse(strStopBlockTime[1]);
 
-                                isBlocked = true;
+                                Properties.Settings.Default.isBlocked = true;
                                 block.SetBlock();
-                                timeBlock.Start();
+                                if (!timeBlock.Enabled)
+                                    timeBlock.Start();
                             }
                             else
                             {
@@ -265,42 +258,54 @@ namespace BlockSocNetwork
                         }
                     }
                 }
-            }
+                Properties.Settings.Default.Save();
+            }        
         }
 
         //проверка заблокированного времени и разблокировка сайтов
-        private void CheckBlockTime (object sender, EventArgs e)
+        private void CheckBlockTime (object sender = null, EventArgs e = null)
         {
             currentTime = TimeSpan.Parse(DateTime.Now.ToString().Split(' ')[1]);
-            if (currentTime > stopBlockTime)
+            if (currentTime > Properties.Settings.Default.stopBlockTime)
             {
                 startTime = TimeSpan.Parse("00:00:00");
-                isBlocked = false;
+                Properties.Settings.Default.isBlocked = false;
+                Properties.Settings.Default.Save();
                 block.DeleteBlock();
                 Status = "Социальные сети разблокированы!";
                 timeBlock.Stop();
             }
-            
-        }
-
-        //проверка текущей даты
-        private void CheckDate (object sender, EventArgs e)
-        {
-            currDate = DateTime.Now.ToString().Split(' ')[0];
-            if (date != currDate)
+            else
             {
-                date = currDate;
-                totalDayTime = TimeSpan.Parse("00:00:00");
-                if  (isDayBlocked)
+                //если при новом запуске программы сайты должны быть все еще заблокированы и таймер не запущен 
+                if (!timeBlock.Enabled)
                 {
-                    block.DeleteBlock();
-                    isBlocked = false;
-                    isDayBlocked = false;
-                    Status = "Социальные сети разблокированы!";
+                    timeBlock.Start();
                 }
             }
         }
 
+        //проверка текущей даты и разблокировка сайтов
+        private void CheckDate (object sender = null, EventArgs e = null)
+        {
+            currDate = DateTime.Now.ToString().Split(' ')[0];
+            if (Properties.Settings.Default.date != currDate)
+            {
+                Properties.Settings.Default.date = currDate;
+                Properties.Settings.Default.totalDayTime = TimeSpan.Parse("00:00:00");
+                if  (Properties.Settings.Default.isDayBlocked)
+                {
+                    block.DeleteBlock();
+                    startTime = TimeSpan.Parse("00:00:00");
+                    Properties.Settings.Default.isBlocked = false;
+                    Properties.Settings.Default.isDayBlocked = false;                   
+                    Status = "Социальные сети разблокированы!";
+                }
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        //измененние настроек пользователем
         private void ChangeSetting()
         {
             try
@@ -308,6 +313,12 @@ namespace BlockSocNetwork
                 maxDifCurrStartTime = TimeSpan.Parse(MaxTime);
                 maxTotalDayTime = TimeSpan.Parse(MaxDayTime);
                 blockTime = TimeSpan.Parse(BlockTime);
+
+                Properties.Settings.Default.blockTime = BlockTime;
+                Properties.Settings.Default.maxTime = MaxTime;
+                Properties.Settings.Default.maxDayTime = MaxDayTime;
+                Properties.Settings.Default.Save();
+
                 MessageBox.Show("Настройки изменены!");
             }
             catch
@@ -315,5 +326,24 @@ namespace BlockSocNetwork
                 MessageBox.Show("Произошла ошибка! Проверьте ввод данных!");
             }
         }
+
+        //проверка на блокировку соц сетей при новом запуске программы
+        private void CheckBlock()
+        {
+            if (Properties.Settings.Default.isDayBlocked)
+            {
+                Status = "Социальные сети заблокированы до конца суток!";
+                CheckDate();
+            }
+            else
+            {
+                if (Properties.Settings.Default.isBlocked)
+                {
+                    Status = "Социальные сети заблокированы!";
+                    CheckBlockTime();
+                }
+            }                    
+        }
+
     }
 }
