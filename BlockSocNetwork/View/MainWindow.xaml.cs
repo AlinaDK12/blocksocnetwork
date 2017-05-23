@@ -64,8 +64,10 @@ namespace BlockSocNetwork
 
         public void Window_Closing(object sender, CancelEventArgs e)
         {
-            PasswordWindow passwordWindow = new PasswordWindow();
-            passwordWindow.Show();
+            //PasswordWindow passwordWindow = new PasswordWindow();
+            //passwordWindow.Show();
         }
     }
+
+   
 }

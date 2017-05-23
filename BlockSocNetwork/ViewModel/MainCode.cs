@@ -26,6 +26,7 @@ namespace BlockSocNetwork
         public MainCode()
         {
             CommandChangeSetting = new RelayCommand(arg => ChangeSetting());
+            CommandAddSite = new RelayCommand(arg => AddSite());
                  
             //если файла с вебсайтами для блокировки не существует, то создается новый
             if (!File.Exists(pathWebsites))
@@ -58,7 +59,9 @@ namespace BlockSocNetwork
 
         //---------------------------КОМАНДЫ-----------------------------
         public ICommand CommandChangeSetting { get; set; }
+        public ICommand CommandAddSite { get; set; }
 
+        #region Fields
         //---------------------------ПОЛЯ-----------------------------
         private Socket socket;                                                                              //прослушивающее устройство
         private byte[] buffer;                                                                              //полученные пакеты
@@ -68,6 +71,9 @@ namespace BlockSocNetwork
         private string _maxTime = Properties.Settings.Default.maxTime;
         private string _maxDayTime = Properties.Settings.Default.maxDayTime;
         private string _blockTime = Properties.Settings.Default.blockTime;
+        private string _newDomen;
+        private string _newIpDns;
+        private string _newIpRange;
 
         public static bool isCheckedTime = Properties.Settings.Default.isCheckedTime;                       //checkbox блокировка по интервалу
         public static bool isCheckedDayTime = Properties.Settings.Default.isCheckedDayTime;                 //checkbox блокировка на сутки
@@ -75,6 +81,7 @@ namespace BlockSocNetwork
         DefaultWebsites defaultWebsites = new DefaultWebsites();                                            
         Block block = new Block();
         CheckRange checkRange = new CheckRange();
+        AddSite addSite = new AddSite();
         
         const string pathWebsites = "websites.json";                                                        //файл с вебсайтами для блокировки
 
@@ -92,8 +99,9 @@ namespace BlockSocNetwork
         
         Timer timeBlock = new Timer();
         Timer timerCheckDate = new Timer();
+        #endregion
 
-
+        #region Properties
         //--------------------------СВОЙСТВА--------------------------
         public string Status
         {
@@ -146,6 +154,46 @@ namespace BlockSocNetwork
                 }
             }
         }
+
+        public string NewDomen
+        {
+            get { return _newDomen; }
+            set
+            {
+                if (_newDomen != value)
+                {
+                    _newDomen = value;
+                    OnPropertyChanged("NewDomen");
+                }
+            }
+        }
+
+        public string NewIpDns
+        {
+            get { return _newIpDns; }
+            set
+            {
+                if (_newIpDns != value)
+                {
+                    _newIpDns = value;
+                    OnPropertyChanged("NewIpDns");
+                }
+            }
+        }
+
+        public string NewIpRange
+        {
+            get { return _newIpRange; }
+            set
+            {
+                if (_newIpRange != value)
+                {
+                    _newIpRange = value;
+                    OnPropertyChanged("NewIpRange");
+                }
+            }
+        }
+        #endregion
 
         //---------------------------МЕТОДЫ---------------------------
         //получаем прослушиваемое устройство
@@ -345,5 +393,28 @@ namespace BlockSocNetwork
             }                    
         }
 
+        //добавить сайт
+        private void AddSite()
+        {
+            if (addSite.CheckData(NewDomen, NewIpDns, NewIpRange))
+            {
+                if (addSite.Add(NewDomen, NewIpDns, NewIpRange))
+                {
+                    MessageBox.Show("Сайт добавлен!");                   
+                }
+                else
+                {
+                    MessageBox.Show("Произошла ошибка! Сайт не был добавлен!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Проверьте ввод данных!");
+                return;
+            }
+        }
+
     }
+
+
 }
