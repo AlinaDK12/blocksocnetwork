@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
         xmlns:local="clr-namespace:BlockSocNetwork"
         Closing="Window_Closing"
-        Title="BlockSocNetwork" Height="450" Width="500" MinHeight="250" MinWidth="450">
+        Title="BlockSocNetwork" Height="500" Width="500" MinHeight="250" MinWidth="450">
     <Window.DataContext>
         <local:MainCode/>
     </Window.DataContext>
@@ -47,15 +47,16 @@
     </Window.Resources>
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="40" Height="*"/>
-            <RowDefinition MinHeight="320" Height="8*"/>
+            <RowDefinition MinHeight="30" Height="*"/>
+            <RowDefinition MinHeight="370" Height="10*"/>
+            <RowDefinition MinHeight="30" Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock TextWrapping="WrapWithOverflow" Text="Статус: "/>
             <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Path=Status}"/>
         </WrapPanel>
        
-        <TabControl Grid.Row="1">
+        <TabControl Grid.Row="1" MinHeight="380" Height="380"  MinWidth="480" Width="480">
             <TabItem Header="Настройка времени">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -144,8 +145,8 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <DataGrid x:Name="GridWebsites" Grid.Row="0" Height="100" Width="250" ItemsSource="{Binding GridWebsites}" 
-                                      AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="10 10" HorizontalAlignment="Center">
+                            <DataGrid x:Name="GridWebsites" Grid.Row="0" Height="110" Width="280" ItemsSource="{Binding GridWebsites}" 
+                                      AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="10 5" HorizontalAlignment="Center">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
@@ -167,5 +168,9 @@
                 
             </TabItem>
         </TabControl>
+        <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">
+            <TextBlock TextWrapping="WrapWithOverflow" Text="Количество перехваченных пакетов: "/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Path=Quantity}" />
+        </WrapPanel>
     </Grid>
 </Window>

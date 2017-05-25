@@ -69,7 +69,7 @@ namespace BlockSocNetwork
         public ICommand CommandChangeBlockSites { get; set; }
 
         #region Fields
-        //---------------------------ПОЛЯ-----------------------------
+        //---------------------------ПОЛЯ и ОБЪЕКТЫ-----------------------------
         private Socket socket;                                                                              //прослушивающее устройство
         private byte[] buffer;                                                                              //полученные пакеты
         private string hostIPAddress;                                                                       // IP прослушиваемого устройства
@@ -81,6 +81,7 @@ namespace BlockSocNetwork
         private string _newDomen;
         private string _newIpDns;
         private string _newIpRange;
+        private int _quantity = 0;
         ObservableCollection<WebsitesModel> _gridWebsites;
 
         public static bool isCheckedTime = Properties.Settings.Default.isCheckedTime;                       //checkbox блокировка по интервалу
@@ -199,6 +200,19 @@ namespace BlockSocNetwork
                 {
                     _newIpRange = value;
                     OnPropertyChanged("NewIpRange");
+                }
+            }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                if (_quantity != value)
+                {
+                    _quantity = value;
+                    OnPropertyChanged("Quantity");
                 }
             }
         }
@@ -327,8 +341,9 @@ namespace BlockSocNetwork
                             startTime = TimeSpan.Parse("00:00:00");
                         }
                     }
-                }
-                Properties.Settings.Default.Save();
+                    ++Quantity;
+                    Properties.Settings.Default.Save();
+                }               
             }        
         }
 
@@ -370,6 +385,7 @@ namespace BlockSocNetwork
                     Properties.Settings.Default.isBlocked = false;
                     Properties.Settings.Default.isDayBlocked = false;                   
                     Status = "Социальные сети разблокированы!";
+                    Quantity = 0;
                 }
                 Properties.Settings.Default.Save();
             }
@@ -422,7 +438,8 @@ namespace BlockSocNetwork
             {
                 if (addSite.Add(NewDomen, NewIpDns, NewIpRange))
                 {
-                    MessageBox.Show("Сайт добавлен!");                   
+                    MessageBox.Show("Сайт добавлен!");
+                    GetGridData();                  
                 }
                 else
                 {
@@ -442,6 +459,7 @@ namespace BlockSocNetwork
             GridWebsites = new ObservableCollection<WebsitesModel>(listBlockWebsites.GetList());
         }
 
+        //изменить список блокируемых сайтов
         private void ChangeBlockSites ()
         {
             List<WebsitesModel> newList = new List<WebsitesModel>(GridWebsites);
