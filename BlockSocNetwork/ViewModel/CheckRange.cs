@@ -15,25 +15,28 @@ namespace BlockSocNetwork
             sites = GetWebsites();
             foreach (var site in sites.Websites)
             {
-                for (int i = 0; i < site.IPAddressStart.Length; i++)
+                if (site.IsSelected == true)
                 {
-                    IPAddress ipAddressStart = IPAddress.Parse(site.IPAddressStart[i]);
-                    IPAddress ipAddressEnd = IPAddress.Parse(site.IPAddressEnd[i]);
-                    byte[] ipStart = ipAddressStart.GetAddressBytes();
-                    byte[] ipEnd = ipAddressEnd.GetAddressBytes();
-                    byte[] ip = _ip.GetAddressBytes();
+                    for (int i = 0; i < site.IPAddressStart.Length; i++)
+                    {
+                        IPAddress ipAddressStart = IPAddress.Parse(site.IPAddressStart[i]);
+                        IPAddress ipAddressEnd = IPAddress.Parse(site.IPAddressEnd[i]);
+                        byte[] ipStart = ipAddressStart.GetAddressBytes();
+                        byte[] ipEnd = ipAddressEnd.GetAddressBytes();
+                        byte[] ip = _ip.GetAddressBytes();
 
-                    if (
-                        //проверка на нижний предел диапазона
-                        ip[0] == ipStart[0] &&
-                        ip[1] == ipStart[1] &&
-                        ip[2] >= ipStart[2] &&
-                        //проверка на верхний предел диапазона
-                        ip[0] == ipEnd[0] &&
-                        ip[1] == ipEnd[1] &&
-                        ip[2] <= ipEnd[2]
-                        )
-                        return true;
+                        if (
+                            //проверка на нижний предел диапазона
+                            ip[0] == ipStart[0] &&
+                            ip[1] == ipStart[1] &&
+                            ip[2] >= ipStart[2] &&
+                            //проверка на верхний предел диапазона
+                            ip[0] == ipEnd[0] &&
+                            ip[1] == ipEnd[1] &&
+                            ip[2] <= ipEnd[2]
+                            )
+                            return true;
+                    }
                 }
             }          
            return false;

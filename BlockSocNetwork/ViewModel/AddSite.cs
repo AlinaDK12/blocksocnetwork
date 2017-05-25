@@ -129,6 +129,7 @@ namespace BlockSocNetwork
                     IP = listIP.ToArray<string>(),
                     IPAddressStart = new string[1] { ipRange[0] },
                     IPAddressEnd = new string[1] { ipRange[1] },
+                    IsSelected = true,
 
                 };
 

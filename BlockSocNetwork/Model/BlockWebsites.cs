@@ -11,5 +11,6 @@
         public string[] IP { get; set; }
         public string[] IPAddressStart { get; set; }
         public string[] IPAddressEnd { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

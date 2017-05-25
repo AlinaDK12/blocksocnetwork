@@ -7,6 +7,9 @@ using System.Net.Sockets;
 using System.Timers;
 using NetFwTypeLib;
 using System.IO;
+using System.Collections.ObjectModel;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace BlockSocNetwork
 {
@@ -27,6 +30,7 @@ namespace BlockSocNetwork
         {
             CommandChangeSetting = new RelayCommand(arg => ChangeSetting());
             CommandAddSite = new RelayCommand(arg => AddSite());
+            CommandChangeBlockSites = new RelayCommand(arg => ChangeBlockSites());
                  
             //если файла с вебсайтами для блокировки не существует, то создается новый
             if (!File.Exists(pathWebsites))
@@ -46,6 +50,8 @@ namespace BlockSocNetwork
             StartSniffer();
             //проверяем при запуске, были ли уже заблокированы сайты
             CheckBlock();
+            //получаем данные для грида
+            GetGridData();
 
             //таймер для проверки заблокированного интервала времени
             timeBlock.Interval = 10000;
@@ -60,6 +66,7 @@ namespace BlockSocNetwork
         //---------------------------КОМАНДЫ-----------------------------
         public ICommand CommandChangeSetting { get; set; }
         public ICommand CommandAddSite { get; set; }
+        public ICommand CommandChangeBlockSites { get; set; }
 
         #region Fields
         //---------------------------ПОЛЯ-----------------------------
@@ -74,6 +81,7 @@ namespace BlockSocNetwork
         private string _newDomen;
         private string _newIpDns;
         private string _newIpRange;
+        ObservableCollection<WebsitesModel> _gridWebsites;
 
         public static bool isCheckedTime = Properties.Settings.Default.isCheckedTime;                       //checkbox блокировка по интервалу
         public static bool isCheckedDayTime = Properties.Settings.Default.isCheckedDayTime;                 //checkbox блокировка на сутки
@@ -82,6 +90,7 @@ namespace BlockSocNetwork
         Block block = new Block();
         CheckRange checkRange = new CheckRange();
         AddSite addSite = new AddSite();
+        ListBlockWebsites listBlockWebsites = new ListBlockWebsites();
         
         const string pathWebsites = "websites.json";                                                        //файл с вебсайтами для блокировки
 
@@ -190,6 +199,19 @@ namespace BlockSocNetwork
                 {
                     _newIpRange = value;
                     OnPropertyChanged("NewIpRange");
+                }
+            }
+        }
+
+        public ObservableCollection<WebsitesModel> GridWebsites
+        {
+            get { return _gridWebsites; }
+            set
+            {
+                if (_gridWebsites != value)
+                {
+                    _gridWebsites = value;
+                    OnPropertyChanged("GridWebsites");
                 }
             }
         }
@@ -414,7 +436,26 @@ namespace BlockSocNetwork
             }
         }
 
-    }
+        //получить данные для грида 
+        private void GetGridData ()
+        {
+            GridWebsites = new ObservableCollection<WebsitesModel>(listBlockWebsites.GetList());
+        }
 
+        private void ChangeBlockSites ()
+        {
+            List<WebsitesModel> newList = new List<WebsitesModel>(GridWebsites);
+            bool result = listBlockWebsites.ChangeBlockWebsites(newList);
+            if (result)
+            {
+                MessageBox.Show("Все супер!");
+            }
+            else
+            {
+                MessageBox.Show("Печалька");
+            }            
+        }
+
+    }
 
 }

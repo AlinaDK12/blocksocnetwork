@@ -47,11 +47,16 @@ namespace BlockSocNetwork
                     currentFirewallRule.Enabled = false;
                 }
             }
-            catch
-            {
+            catch { }
+        }
 
+        public void DeleteRule()
+        {
+            try
+            {
+                firewallPolicy.Rules.Remove(nameRule);
             }
-           // firewallPolicy.Rules.Remove(nameRule);
+            catch { }
         }
 
         //получаем все IP для блокировки
@@ -68,9 +73,12 @@ namespace BlockSocNetwork
 
             foreach (var item in newCollection.Websites)
             {
-                foreach (var ip in item.IP)
+                if (item.IsSelected == true)
                 {
-                    str += ip + ",";
+                    foreach (var ip in item.IP)
+                    {
+                        str += ip + ",";
+                    }
                 }
             }
             //удаление последней ,
