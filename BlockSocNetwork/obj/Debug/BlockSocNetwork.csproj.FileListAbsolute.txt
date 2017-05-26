@@ -93,3 +93,6 @@ C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNet
 C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNetwork\obj\Debug\BlockSocNetwork.pdb
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\AboutProgramWindow.g.cs
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\AboutProgramWindow.baml
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csprojResolveAssemblyReference.cache
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\HelpWindow.g.cs
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\HelpWindow.baml

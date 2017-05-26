@@ -1,0 +1,28 @@
+﻿<Window x:Class="BlockSocNetwork.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlockSocNetwork"
+        mc:Ignorable="d"
+        Title="Помощь" Height="200" Width="500" ResizeMode="NoResize" Icon="Block.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="10 5 10 0">
+            <TextBlock TextWrapping="WrapWithOverflow" Text="Чтобы узнать IP-адреса DNS-сервера вебсайта, необходимо: "/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="1. Открыть на компьютере командную строку."/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="2. Ввести команду nslookup website_domain_name (например, nslookup vk.com)."/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="10 0 10 10">
+            <TextBlock TextWrapping="WrapWithOverflow" Text="Чтобы узнать диапазон IP-адресов вебсайта, необходимо:"/>
+            <TextBlock TextWrapping="WrapWithOverflow">
+                1. Открыть в браузере любой whois-сервис, например, <Hyperlink NavigateUri="https://www.nic.ru/whois/">https://www.nic.ru/whois</Hyperlink>
+            </TextBlock>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="2. Ввести IP-адрес DNS-сервера этого вебсайта."/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="В поле «inetnum» отобразится диапазон IP-адресов вебсайта."/>
+        </StackPanel>
+    </Grid>
+</Window>

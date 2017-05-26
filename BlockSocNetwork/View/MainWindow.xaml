@@ -62,7 +62,7 @@
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="Помощь">
-                    <MenuItem Header="Добавление сайтов"/>
+                    <MenuItem Header="Добавление сайтов" Click="MenuItemHelp_Click"/>
                 </MenuItem>
                 <MenuItem Header="О программе" Click="MenuItemAboutProgram_Click"/>
             </MenuItem>

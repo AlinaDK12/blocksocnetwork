@@ -79,6 +79,12 @@ namespace BlockSocNetwork
             TabControl.SelectedItem = Statistics;
         }
 
+        private void MenuItemHelp_Click(object sender, RoutedEventArgs e)
+        {
+            HelpWindow helpWindow = new HelpWindow();
+            helpWindow.Show();
+        }
+
         private void MenuItemAboutProgram_Click(object sender, RoutedEventArgs e)
         {
             AboutProgramWindow aboutProgramWindow = new AboutProgramWindow();
