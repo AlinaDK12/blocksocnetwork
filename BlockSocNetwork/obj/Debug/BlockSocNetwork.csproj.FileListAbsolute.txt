@@ -59,7 +59,6 @@ C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\Bl
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csproj.GenerateResource.Cache
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\PasswordWindow.g.cs
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\PasswordWindow.baml
-C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csprojResolveAssemblyReference.cache
 C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNetwork\bin\Debug\BlockSocNetwork.exe.config
 C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNetwork\obj\Debug\Interop.NetFwTypeLib.dll
 C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNetwork\obj\Debug\BlockSocNetwork.csproj.ResolveComReference.cache
@@ -92,3 +91,5 @@ C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNet
 C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNetwork\obj\Debug\BlockSocNetwork.csproj.GenerateResource.Cache
 C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNetwork\obj\Debug\BlockSocNetwork.exe
 C:\Users\Alina\Desktop\blocksocnetwork-master\blocksocnetwork-master\BlockSocNetwork\obj\Debug\BlockSocNetwork.pdb
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\AboutProgramWindow.g.cs
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\AboutProgramWindow.baml

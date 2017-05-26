@@ -21,6 +21,8 @@ namespace BlockSocNetwork
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isClose = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -61,11 +63,41 @@ namespace BlockSocNetwork
             Properties.Settings.Default.isCheckedDayTime = false;
             Properties.Settings.Default.Save();
         }
-
-        public void Window_Closing(object sender, CancelEventArgs e)
+        
+        private void MenuItemTimeSetting_Click(object sender, RoutedEventArgs e)
         {
-            PasswordWindow passwordWindow = new PasswordWindow();
-            passwordWindow.Show();
+            TabControl.SelectedItem = TimeSetting;
+        }
+
+        private void MenuItemWebsitesSetting_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl.SelectedItem = WebsitesSetting;
+        }
+
+        private void MenuItemStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl.SelectedItem = Statistics;
+        }
+
+        private void MenuItemAboutProgram_Click(object sender, RoutedEventArgs e)
+        {
+            AboutProgramWindow aboutProgramWindow = new AboutProgramWindow();
+            aboutProgramWindow.Show();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (!isClose)
+            {
+                PasswordWindow passwordWindow = new PasswordWindow();
+                passwordWindow.Show();
+            }           
+        }
+
+        private void MenuItemExit_Click(object sender, RoutedEventArgs e)
+        {
+            isClose = true;
+            Close();
         }
     }
 

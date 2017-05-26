@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
         xmlns:local="clr-namespace:BlockSocNetwork"
         Closing="Window_Closing"
-        Title="BlockSocNetwork" Height="500" Width="500" MinHeight="250" MinWidth="450">
+        Title="BlockSocNetwork" Height="530" Width="530" MinHeight="250" MinWidth="450" Icon="Block.ico">
     <Window.DataContext>
         <local:MainCode/>
     </Window.DataContext>
@@ -48,16 +48,31 @@
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="30" Height="*"/>
-            <RowDefinition MinHeight="370" Height="10*"/>
-            <RowDefinition MinHeight="30" Height="*"/>
+            <RowDefinition MinHeight="30" Height="2*"/>
+            <RowDefinition MinHeight="380" Height="10*"/>
+            <RowDefinition MinHeight="30" Height="2*"/>
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Menu Grid.Row="0" FontSize="13" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Файл" >
+                <MenuItem Header="Настройка времени" Click="MenuItemTimeSetting_Click"/>
+                <MenuItem Header="Настройка сайтов" Click="MenuItemWebsitesSetting_Click"/>
+                <MenuItem Header="Статистика" Click="MenuItemStatistics_Click"/>
+                <Separator/>
+                <MenuItem Header="Выход" Click="MenuItemExit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="Помощь">
+                    <MenuItem Header="Добавление сайтов"/>
+                </MenuItem>
+                <MenuItem Header="О программе" Click="MenuItemAboutProgram_Click"/>
+            </MenuItem>
+        </Menu>
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock TextWrapping="WrapWithOverflow" Text="Статус: "/>
             <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Path=Status}"/>
         </WrapPanel>
-       
-        <TabControl Grid.Row="1" MinHeight="380" Height="380"  MinWidth="480" Width="480">
-            <TabItem Header="Настройка времени">
+        <TabControl x:Name="TabControl" Grid.Row="2" MinHeight="380" Height="380"  MinWidth="500" Width="500" >
+            <TabItem x:Name="TimeSetting" Header="Настройка времени">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition MinHeight="30" Height="*"/>
@@ -102,10 +117,11 @@
                     <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20 5">
                         <TextBlock FontSize="10" TextWrapping="WrapWithOverflow" Text="* Введите время в формате 00:00:00"/>
                     </Label>
-                    <Button Grid.Column="2" Grid.Row="6" Content="Изменить" Width="90" Height="30" Command="{Binding CommandChangeSetting}"/>
+                    <Button Grid.Column="2" Grid.Row="6" Content="Изменить" Width="90" Height="30" Command="{Binding CommandChangeSetting}"
+                            HorizontalAlignment="Right" Margin="5"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Настройка сайтов">
+            <TabItem x:Name="WebsitesSetting" Header="Настройка сайтов">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition MinHeight="180" Height="*"/>
@@ -164,11 +180,11 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="О программе">
+            <TabItem x:Name="Statistics" Header="Статистика">
                 
             </TabItem>
         </TabControl>
-        <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">
+        <WrapPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">
             <TextBlock TextWrapping="WrapWithOverflow" Text="Количество перехваченных пакетов: "/>
             <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Path=Quantity}" />
         </WrapPanel>

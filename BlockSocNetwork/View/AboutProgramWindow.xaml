@@ -1,0 +1,16 @@
+﻿<Window x:Class="BlockSocNetwork.AboutProgramWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlockSocNetwork"
+        mc:Ignorable="d"
+        Title="О программе" Height="200" Width="300" ResizeMode="NoResize" Icon="Block.ico">
+    <Grid>
+        <StackPanel>
+            <TextBlock Margin="10" TextWrapping="WrapWithOverflow" Text="Система родительского контроля для анализа и управления сетевым трафиком разрабатывалась в рамках выпускной квалификационной работы по направлению «Информационные системы и технологии»."/>
+            <TextBlock Margin="10 0 10 10" TextWrapping="WrapWithOverflow" Text="Институт Кибернетики"/>
+            <TextBlock Margin="10 0 10 10" TextWrapping="WrapWithOverflow" Text="Томский Политехнический Университет"/>
+        </StackPanel>
+    </Grid>
+</Window>
