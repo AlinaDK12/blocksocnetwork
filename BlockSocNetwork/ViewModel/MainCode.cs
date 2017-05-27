@@ -267,25 +267,18 @@ namespace BlockSocNetwork
         private void OnReceive(IAsyncResult ar)
         {
 
-            try
-            {
-                int nReceived = socket.EndReceive(ar);
-                CheckIP(buffer, nReceived);
-                buffer = new byte[4096];
-                socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None,
-                    OnReceive, null);
-            }
-            catch
-            {
-                MessageBox.Show("OnRecieve Ошибка!");
-            }
+
+            int nReceived = socket.EndReceive(ar);
+            CheckIP(buffer, nReceived);
+            buffer = new byte[4096];
+            socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, OnReceive, null);
         }
      
         //проверка IP и блокировка сайтов
         private void CheckIP (byte[] buf, int len)
+
         {
             IPHeader ipHeader = new IPHeader(buf, len);   
-
             if (!Properties.Settings.Default.isBlocked)
             {
                 if (checkRange.IsInRange(ipHeader.DestinationAddress) && (ipHeader.DestinationAddress.ToString() != "87.240.165.82"))
@@ -305,20 +298,22 @@ namespace BlockSocNetwork
                         statisticsWebsite.Name = checkRange.GetWebsiteName();
                         statisticsWebsite.Date = DateTime.Now.ToString().Split(' ')[0];
                         statisticsWebsite.Time = difCurrPrevTime;
+                        bool isInList = false;
+                        int countList = statisticsWebsites.Count;
                         if (statisticsWebsites.Count != 0)
                         {
-                            foreach (var site in statisticsWebsites)
+                            for (int i = 0; i < countList; i++)
                             {
                                 //если в списке уже есть этот сайт, добавляем время
-                                if (statisticsWebsite.Name == site.Name)
+                                if (statisticsWebsites[i].Name == statisticsWebsite.Name)
                                 {
-                                    site.Time += difCurrPrevTime;
-                                }
-                                //иначе добавляем в сайт список
-                                else
-                                { 
-                                    statisticsWebsites.Add(statisticsWebsite);
-                                }
+                                    statisticsWebsites[i].Time += difCurrPrevTime;
+                                    isInList = true;
+                                }                               
+                            }
+                            if (!isInList)
+                            {
+                                statisticsWebsites.Add(statisticsWebsite);
                             }
                         }
                         else

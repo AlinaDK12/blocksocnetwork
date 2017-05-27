@@ -3,8 +3,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        xmlns:dvc="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"     
         xmlns:local="clr-namespace:BlockSocNetwork"
+        Loaded="Window_Loaded"
         Closing="Window_Closing"
         Title="BlockSocNetwork" Height="530" Width="530" MinHeight="250" MinWidth="450" Icon="Block.ico">
     <Window.DataContext>
@@ -182,7 +186,11 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="Statistics" Header="Статистика">
-                
+                <StackPanel>
+                    <WindowsFormsHost>
+                        <dvc:Chart x:Name="chart"/>
+                    </WindowsFormsHost>
+                </StackPanel>
             </TabItem>
         </TabControl>
         <WrapPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">

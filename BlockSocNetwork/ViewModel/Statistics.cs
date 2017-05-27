@@ -22,21 +22,26 @@ namespace BlockSocNetwork
                 }
                 List<WebsiteStatisticsModel> collection = JsonConvert.DeserializeObject<List<WebsiteStatisticsModel>>(serializedText);
 
-                foreach (var col in collection)
+                int countOldList = collection.Count;
+                int countNewList = statisticsWebsites.Count;
+                bool isInList = false;
+
+                for (int i = 0; i < countNewList; i++)
                 {
-                    foreach (var site in statisticsWebsites)
+                    isInList = false;
+                    for (int j = 0; j < countOldList; j++)
                     {
-                        if (col.Name == site.Name && col.Date == site.Date)
+                        if (collection[j].Name == statisticsWebsites[i].Name && collection[j].Date == statisticsWebsites[i].Date)
                         {
-                            col.Time += site.Time;
-                        }
-                        else
-                        {
-                            collection.Add(site);
+                            collection[j].Time += statisticsWebsites[i].Time;
+                            isInList = true;
                         }
                     }
-                }
-
+                    if (!isInList)
+                    {
+                        collection.Add(statisticsWebsites[i]);
+                    }
+                }             
                 //в json
                 string serialized = JsonConvert.SerializeObject(collection);
 
@@ -55,6 +60,22 @@ namespace BlockSocNetwork
                 sw.Write(serialized);
                 sw.Close();
             }
+        }
+
+        public List<WebsiteStatisticsModel> Get()
+        {
+            if (File.Exists(pathStatistics))
+            {
+                string serializedText = "";
+
+                using (StreamReader sr = new StreamReader(pathStatistics, Encoding.Default))
+                {
+                    serializedText = sr.ReadToEnd();
+                }
+                List<WebsiteStatisticsModel> collection = JsonConvert.DeserializeObject<List<WebsiteStatisticsModel>>(serializedText);
+                return collection;
+            }
+            else return null;
         }
     }
 }

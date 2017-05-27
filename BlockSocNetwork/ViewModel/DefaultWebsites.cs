@@ -24,8 +24,8 @@ namespace BlockSocNetwork
             {
                 Name = "facebook.com",
                 IP = new string[1] { "31.13.72.36" },
-                IPAddressStart = new string[1] { "31.13.93.0" },
-                IPAddressEnd = new string[1] { "31.13.93.255" },
+                IPAddressStart = new string[2] { "31.13.93.0", "31.13.72.0" },
+                IPAddressEnd = new string[2] { "31.13.93.255", "31.13.72.255" },
                 IsSelected = true,
             };
             collection.Websites[2] = new Website()

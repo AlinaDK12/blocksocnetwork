@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace BlockSocNetwork
 {
@@ -35,6 +36,49 @@ namespace BlockSocNetwork
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<WebsiteStatisticsModel> statisticsList = new List<WebsiteStatisticsModel>();
+            statisticsList = statistics.Get();
+            int number = 1;
+
+            IEnumerable<string> domainList = new List<string>();
+            domainList = statisticsList.Select(x => x.Name).Distinct();
+
+            IEnumerable<string> datesList = new List<string>();
+                            
+            chart.ChartAreas.Add(new ChartArea("Graphics"));
+            chart.ChartAreas["Graphics"].AxisX.Title = "Дата";
+            chart.ChartAreas["Graphics"].AxisY.Title = "Время (мин)";   
+
+            foreach (var site in domainList)
+            {
+                List<double> timeList = new List<double>();
+                double time = 0;
+                foreach (var item in statisticsList)
+                {
+                    if (site == item.Name)
+                    {
+                        time = (Convert.ToDouble(item.Time.ToString().Split(':')[0])) * 60 + (Convert.ToDouble(item.Time.ToString().Split(':')[1])) + (Convert.ToDouble(item.Time.ToString().Split(':')[2])) / 60;
+                        timeList.Add(time);
+                    }                    
+                }
+
+                datesList = statisticsList.Where(s => s.Name == site).Select(x => x.Date).Distinct();
+
+                string[] xData = datesList.ToArray();
+                double[] yData = timeList.ToArray();
+
+                string name = "Series" + number++;
+                chart.Series.Add(new Series(name));
+                chart.Series[name].ChartArea = "Graphics";
+                chart.Series[name].ChartType = SeriesChartType.Line;
+                chart.Series[name].Points.DataBindXY(xData, yData);
+                chart.Series[name].ToolTip = site;
+                chart.Series[name].BorderWidth = 5;
+            }
         }
 
         public void checkboxTime_Checked(object sender, RoutedEventArgs e)
