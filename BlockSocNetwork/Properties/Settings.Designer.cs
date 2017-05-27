@@ -154,5 +154,17 @@ namespace BlockSocNetwork.Properties {
                 this["password"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool isStartProgram {
+            get {
+                return ((bool)(this["isStartProgram"]));
+            }
+            set {
+                this["isStartProgram"] = value;
+            }
+        }
     }
 }

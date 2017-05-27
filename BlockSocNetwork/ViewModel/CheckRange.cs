@@ -9,6 +9,7 @@ namespace BlockSocNetwork
     {
         const string path = "websites.json";
         BlockWebsites sites = new BlockWebsites();
+        private string name;
 
         public bool IsInRange(IPAddress _ip)
         {
@@ -35,7 +36,10 @@ namespace BlockSocNetwork
                             ip[1] == ipEnd[1] &&
                             ip[2] <= ipEnd[2]
                             )
+                        {
+                            name = site.Name;
                             return true;
+                        }                          
                     }
                 }
             }          
@@ -54,6 +58,12 @@ namespace BlockSocNetwork
             BlockWebsites newCollection = JsonConvert.DeserializeObject<BlockWebsites>(serializedText);
 
             return newCollection;
+        }
+
+        //получить DNS-адрес сайта
+        public string GetWebsiteName()
+        {
+            return name;
         }
     }
 }

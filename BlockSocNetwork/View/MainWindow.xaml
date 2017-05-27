@@ -1,4 +1,5 @@
 ﻿<Window x:Class="BlockSocNetwork.MainWindow"
+        x:Name="BigWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -139,7 +140,7 @@
                                 <ColumnDefinition MinWidth="100" Width="*"/>
                                 <ColumnDefinition MinWidth="200" Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Домен: "/>
+                            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="DNS-адрес: "/>
                             <TextBox Grid.Column="1" Grid.Row="0" local:WaterMarkExtentions.WaterMark="google.com" Style="{StaticResource WaterMarkTextboxStyle}"
                              VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" Text="{Binding Path=NewDomen}"/>
                             <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="IP-адрес DNS-сервера: " />
@@ -171,8 +172,8 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTextColumn Header="Домен" Binding="{Binding Name}"  />
-                                    <DataGridTextColumn Header="IP-адреса сайта" Binding="{Binding RangeIP}"  />
+                                    <DataGridTextColumn Header="DNS-адрес" Binding="{Binding Name}"  />
+                                    <DataGridTextColumn Header="IP-адреса" Binding="{Binding RangeIP}"  />
                                 </DataGrid.Columns>
                             </DataGrid>
                             <Button Grid.Row="1" Content="Изменить" Width="80" Height="30" Command="{Binding CommandChangeBlockSites}"/>

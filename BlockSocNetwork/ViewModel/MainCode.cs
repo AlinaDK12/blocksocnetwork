@@ -90,8 +90,10 @@ namespace BlockSocNetwork
         DefaultWebsites defaultWebsites = new DefaultWebsites();                                            
         Block block = new Block();
         CheckRange checkRange = new CheckRange();
-        AddSite addSite = new AddSite();
+        AddWebsite addSite = new AddWebsite();
         ListBlockWebsites listBlockWebsites = new ListBlockWebsites();
+        Statistics statistics = new Statistics();
+        public List<WebsiteStatisticsModel> statisticsWebsites = new List<WebsiteStatisticsModel>();
         
         const string pathWebsites = "websites.json";                                                        //файл с вебсайтами для блокировки
 
@@ -297,6 +299,34 @@ namespace BlockSocNetwork
                     else
                     {
                         difCurrPrevTime = currentTime - prevTime;
+
+                        //для статистики
+                        WebsiteStatisticsModel statisticsWebsite = new WebsiteStatisticsModel();
+                        statisticsWebsite.Name = checkRange.GetWebsiteName();
+                        statisticsWebsite.Date = DateTime.Now.ToString().Split(' ')[0];
+                        statisticsWebsite.Time = difCurrPrevTime;
+                        if (statisticsWebsites.Count != 0)
+                        {
+                            foreach (var site in statisticsWebsites)
+                            {
+                                //если в списке уже есть этот сайт, добавляем время
+                                if (statisticsWebsite.Name == site.Name)
+                                {
+                                    site.Time += difCurrPrevTime;
+                                }
+                                //иначе добавляем в сайт список
+                                else
+                                { 
+                                    statisticsWebsites.Add(statisticsWebsite);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            statisticsWebsites.Add(statisticsWebsite);
+                        }
+
+
                         //блокировка на сутки
                         if (isCheckedDayTime)
                         {
@@ -385,7 +415,8 @@ namespace BlockSocNetwork
                     Properties.Settings.Default.isBlocked = false;
                     Properties.Settings.Default.isDayBlocked = false;                   
                     Status = "Социальные сети разблокированы!";
-                    Quantity = 0;
+                    statistics.Write(statisticsWebsites);
+                    statisticsWebsites.Clear();
                 }
                 Properties.Settings.Default.Save();
             }

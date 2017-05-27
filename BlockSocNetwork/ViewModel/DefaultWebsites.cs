@@ -40,7 +40,7 @@ namespace BlockSocNetwork
             {
                 Name = "mail.ru",
                 IP = new string[4] { "217.69.139.199", "217.69.139.202", "94.100.180.199", "94.100.180.202" },
-                IPAddressStart = new string[2] { "94.100.176.0", "271.69.136.0" },
+                IPAddressStart = new string[2] { "94.100.176.0", "217.69.136.0" },
                 IPAddressEnd = new string[2] { "94.100.183.255", "217.69.141.255" },
                 IsSelected = true,
             };

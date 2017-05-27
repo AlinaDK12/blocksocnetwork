@@ -70,7 +70,8 @@
     <Compile Include="Model\HostIPAddress.cs" />
     <Compile Include="Model\IPHeader.cs" />
     <Compile Include="Model\WebsitesModel.cs" />
-    <Compile Include="ViewModel\AddSite.cs" />
+    <Compile Include="Model\WebsiteStatisticsModel.cs" />
+    <Compile Include="ViewModel\AddWebsite.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\Block.cs" />
     <Compile Include="ViewModel\CheckRange.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="ViewModel\ListBlockWebsites.cs" />
     <Compile Include="ViewModel\MainCode.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\Statistics.cs" />
     <Compile Include="ViewModel\WaterMarkExtentions.cs" />
     <Compile Include="View\AboutProgramWindow.xaml.cs">
       <DependentUpon>AboutProgramWindow.xaml</DependentUpon>

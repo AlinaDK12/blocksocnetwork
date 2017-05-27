@@ -22,6 +22,8 @@ namespace BlockSocNetwork
     public partial class MainWindow : Window
     {
         private bool isClose = false;
+        MainCode mainCode = new MainCode();
+        Statistics statistics = new Statistics();
 
         public MainWindow()
         {
@@ -103,6 +105,7 @@ namespace BlockSocNetwork
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
             isClose = true;
+            statistics.Write(mainCode.statisticsWebsites);
             Close();
         }
     }

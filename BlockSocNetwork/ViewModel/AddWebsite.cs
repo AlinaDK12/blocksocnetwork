@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace BlockSocNetwork
 {
-    public class AddSite
+    public class AddWebsite
     {
         const string path = "websites.json";
 
