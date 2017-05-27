@@ -157,13 +157,13 @@ namespace BlockSocNetwork.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool isStartProgram {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isClose {
             get {
-                return ((bool)(this["isStartProgram"]));
+                return ((bool)(this["isClose"]));
             }
             set {
-                this["isStartProgram"] = value;
+                this["isClose"] = value;
             }
         }
     }

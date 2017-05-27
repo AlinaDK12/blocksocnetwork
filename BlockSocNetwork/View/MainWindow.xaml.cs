@@ -21,7 +21,6 @@ namespace BlockSocNetwork
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool isClose = false;
         MainCode mainCode = new MainCode();
         Statistics statistics = new Statistics();
 
@@ -95,18 +94,26 @@ namespace BlockSocNetwork
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            if (!isClose)
+            if (!Properties.Settings.Default.isClose)
             {
-                PasswordWindow passwordWindow = new PasswordWindow();
-                passwordWindow.Show();
+                e.Cancel = true;
+                BigWindow.Visibility = Visibility.Hidden;
+                var pswdWindow = Application.Current.Windows[1];
+                pswdWindow.Visibility = Visibility.Visible;
             }           
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
-            isClose = true;
+            Properties.Settings.Default.isClose = true;
+            Properties.Settings.Default.Save();
             statistics.Write(mainCode.statisticsWebsites);
-            Close();
+
+            //закрываем все окна
+            while(Application.Current.Windows.Count != 0)
+            {
+                Application.Current.Windows[0].Close();
+            }
         }
     }
 

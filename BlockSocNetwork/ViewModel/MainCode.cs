@@ -277,7 +277,7 @@ namespace BlockSocNetwork
             }
             catch
             {
-
+                MessageBox.Show("OnRecieve Ошибка!");
             }
         }
      

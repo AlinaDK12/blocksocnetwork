@@ -10,19 +10,21 @@ namespace BlockSocNetwork
     /// </summary>
     public partial class PasswordWindow : Window
     {
-        private bool isFirst = false;
-        private bool isEnter = false;
-
+        private bool isFirstEnter = false;
+        private bool isStartProgarm = true;
+        MainWindow mainWindow = new MainWindow();
+        
         public PasswordWindow()
         {
             InitializeComponent();
 
-            isEnter = false; 
+            Properties.Settings.Default.isClose = false;
+            Properties.Settings.Default.Save();
 
             if (Properties.Settings.Default.password == "")
             {
                 FirstEnter.Visibility = Visibility.Visible;
-                isFirst = true;
+                isFirstEnter = true;
             }
             else
             {
@@ -32,7 +34,7 @@ namespace BlockSocNetwork
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (isFirst)
+            if (isFirstEnter)
             {
                 Properties.Settings.Default.password = Password.Password;
                 Properties.Settings.Default.Save();
@@ -45,16 +47,25 @@ namespace BlockSocNetwork
                     return;
                 }
             }
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
 
-            isEnter = true;
-            Close();
+            Password.Password = "";
+
+            if(isStartProgarm)
+            {
+                isStartProgarm = false;
+                mainWindow.Show();              
+            }
+            else
+            {
+                mainWindow.Visibility = Visibility.Visible;
+            }
+
+            PswdWindow.Visibility = Visibility.Hidden;
         }
 
         public void PasswordWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (isEnter)
+            if (Properties.Settings.Default.isClose)
                 e.Cancel = false;
             else
                 e.Cancel = true;
@@ -105,12 +116,16 @@ namespace BlockSocNetwork
                 Hide();
             }
             else
-            { 
-                Show();
-                // меняем надпись на пункте меню
-                WindowState = CurrentWindowState;
-                // отдать фокус окну
-                Activate();                                             
+            {
+                try
+                {
+                    Show();
+                    // меняем надпись на пункте меню
+                    WindowState = CurrentWindowState;
+                    // отдать фокус окну
+                    Activate();
+                }
+                 catch { }                                          
             }
         }
 
