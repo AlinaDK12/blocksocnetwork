@@ -1,6 +1,6 @@
 ﻿namespace BlockSocNetwork
 {
-    class BlockWebsites
+    class BlockWebsitesModel
     {
         public Website[] Websites { get; set; }       
     }

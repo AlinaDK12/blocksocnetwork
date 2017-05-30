@@ -68,7 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\BlockWebsites.cs" />
+    <Compile Include="Model\BlockWebsitesModel.cs" />
     <Compile Include="Model\HostIPAddress.cs" />
     <Compile Include="Model\IPHeader.cs" />
     <Compile Include="Model\WebsitesModel.cs" />
@@ -108,7 +108,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\StreamHosts.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -165,9 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Block.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

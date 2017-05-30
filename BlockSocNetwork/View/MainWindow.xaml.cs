@@ -40,6 +40,7 @@ namespace BlockSocNetwork
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // построение графика
             List<WebsiteStatisticsModel> statisticsList = new List<WebsiteStatisticsModel>();
             statisticsList = statistics.Get();
             int number = 1;

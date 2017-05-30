@@ -61,6 +61,7 @@ namespace BlockSocNetwork
             timerCheckDate.Elapsed += new ElapsedEventHandler(CheckDate);
             if (!timerCheckDate.Enabled)
                 timerCheckDate.Start();
+
         }
 
         //---------------------------КОМАНДЫ-----------------------------
@@ -74,7 +75,7 @@ namespace BlockSocNetwork
         private byte[] buffer;                                                                              //полученные пакеты
         private string hostIPAddress;                                                                       // IP прослушиваемого устройства
                                    
-        private string _status = "Социальные сети разблокированы!";
+        private string _status = "Социальные сети разблокированы";
         private string _maxTime = Properties.Settings.Default.maxTime;
         private string _maxDayTime = Properties.Settings.Default.maxDayTime;
         private string _blockTime = Properties.Settings.Default.blockTime;
@@ -266,12 +267,14 @@ namespace BlockSocNetwork
         //начало прослушивания хоста
         private void OnReceive(IAsyncResult ar)
         {
-
-
-            int nReceived = socket.EndReceive(ar);
-            CheckIP(buffer, nReceived);
-            buffer = new byte[4096];
-            socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, OnReceive, null);
+            try
+            {
+                int nReceived = socket.EndReceive(ar);
+                CheckIP(buffer, nReceived);
+                buffer = new byte[4096];
+                socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, OnReceive, null);
+            }
+            catch { }
         }
      
         //проверка IP и блокировка сайтов
@@ -328,7 +331,7 @@ namespace BlockSocNetwork
                             Properties.Settings.Default.totalDayTime += difCurrPrevTime;
                             if (Properties.Settings.Default.totalDayTime >= maxTotalDayTime)
                             {
-                                Status = "Социальные сети заблокированы до конца суток!";
+                                Status = "Социальные сети заблокированы до конца суток";
                                 Properties.Settings.Default.isBlocked = true;
                                 Properties.Settings.Default.isDayBlocked = true;
                                 Properties.Settings.Default.Save();
@@ -342,7 +345,7 @@ namespace BlockSocNetwork
                             difCurrStartTime = currentTime - startTime;
                             if (difCurrStartTime > maxDifCurrStartTime)
                             {
-                                Status = "Социальные сети заблокированы!";
+                                Status = "Социальные сети заблокированы";
 
                                 //если время для блокировки наступит на следующие сутки
                                 strStopBlockTime = (currentTime + blockTime).ToString().Split('.');
@@ -382,7 +385,7 @@ namespace BlockSocNetwork
                 Properties.Settings.Default.isBlocked = false;
                 Properties.Settings.Default.Save();
                 block.DeleteBlock();
-                Status = "Социальные сети разблокированы!";
+                Status = "Социальные сети разблокированы";
                 timeBlock.Stop();
             }
             else
@@ -409,7 +412,7 @@ namespace BlockSocNetwork
                     startTime = TimeSpan.Parse("00:00:00");
                     Properties.Settings.Default.isBlocked = false;
                     Properties.Settings.Default.isDayBlocked = false;                   
-                    Status = "Социальные сети разблокированы!";
+                    Status = "Социальные сети разблокированы";
                     statistics.Write(statisticsWebsites);
                     statisticsWebsites.Clear();
                 }
@@ -444,14 +447,14 @@ namespace BlockSocNetwork
         {
             if (Properties.Settings.Default.isDayBlocked)
             {
-                Status = "Социальные сети заблокированы до конца суток!";
+                Status = "Социальные сети заблокированы до конца суток";
                 CheckDate();
             }
             else
             {
                 if (Properties.Settings.Default.isBlocked)
                 {
-                    Status = "Социальные сети заблокированы!";
+                    Status = "Социальные сети заблокированы";
                     CheckBlockTime();
                 }
             }                    
@@ -465,6 +468,7 @@ namespace BlockSocNetwork
                 if (addSite.Add(NewDomen, NewIpDns, NewIpRange))
                 {
                     MessageBox.Show("Сайт добавлен!");
+                    block.DeleteRule();
                     GetGridData();                  
                 }
                 else

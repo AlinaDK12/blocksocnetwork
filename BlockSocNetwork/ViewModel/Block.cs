@@ -16,6 +16,7 @@ namespace BlockSocNetwork
 
         public void SetBlock()
         {
+            //если правило существует, то оно включается
             try
             {
                 currentFirewallRule = firewallPolicy.Rules.Item(nameRule);
@@ -24,6 +25,7 @@ namespace BlockSocNetwork
                     currentFirewallRule.Enabled = true;
                 }
             }
+            //если правило не существует, то создается и добавляется новое
             catch
             {
                 firewallRule.Name = nameRule;
@@ -37,6 +39,7 @@ namespace BlockSocNetwork
             }                            
         }
 
+        //для разблокировки выключается соответствующее правило в брандмауэре
         public void DeleteBlock()
         {
             try
@@ -50,6 +53,7 @@ namespace BlockSocNetwork
             catch { }
         }
 
+        //при изменении списка блокируемых сайтов правило удаляется из брандмауэра, чтобы потом добавить новое с новыми сайтами
         public void DeleteRule()
         {
             try
@@ -69,7 +73,7 @@ namespace BlockSocNetwork
             {
                 serializedText = sr.ReadToEnd();
             }
-            BlockWebsites newCollection = JsonConvert.DeserializeObject<BlockWebsites>(serializedText);
+            BlockWebsitesModel newCollection = JsonConvert.DeserializeObject<BlockWebsitesModel>(serializedText);
 
             foreach (var item in newCollection.Websites)
             {

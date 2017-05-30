@@ -95,3 +95,4 @@ C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\Vi
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\AboutProgramWindow.baml
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\HelpWindow.g.cs
 C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\View\HelpWindow.baml
+C:\Users\Alina\Desktop\Диплом\BlockSocNetwork\BlockSocNetwork\obj\Debug\BlockSocNetwork.csprojResolveAssemblyReference.cache

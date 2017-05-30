@@ -103,7 +103,7 @@ namespace BlockSocNetwork
                 {
                     serializedText = sr.ReadToEnd();
                 }
-                BlockWebsites collection = JsonConvert.DeserializeObject<BlockWebsites>(serializedText);
+                BlockWebsitesModel collection = JsonConvert.DeserializeObject<BlockWebsitesModel>(serializedText);
 
                 //создаем объект с данными нового сайта
                 string[] ipDns = _ipDns.Trim().Split(',');
@@ -116,7 +116,7 @@ namespace BlockSocNetwork
                     listIP.Add(ipDns[i]);
                 }
 
-                BlockWebsites newCollection = new BlockWebsites();
+                BlockWebsitesModel newCollection = new BlockWebsitesModel();
                 newCollection.Websites = new Website[number + 1];
                 for (int i = 0; i < collection.Websites.Length; i++)
                 {

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -24,7 +20,7 @@ namespace BlockSocNetwork
             {
                 serializedText = sr.ReadToEnd();
             }
-            BlockWebsites collection = JsonConvert.DeserializeObject<BlockWebsites>(serializedText);
+            BlockWebsitesModel collection = JsonConvert.DeserializeObject<BlockWebsitesModel>(serializedText);
             listWebsites = new List<WebsitesModel>();
 
             foreach (var item in collection.Websites)
@@ -50,7 +46,7 @@ namespace BlockSocNetwork
                 {
                     serializedText = sr.ReadToEnd();
                 }
-                BlockWebsites collection = JsonConvert.DeserializeObject<BlockWebsites>(serializedText);
+                BlockWebsitesModel collection = JsonConvert.DeserializeObject<BlockWebsitesModel>(serializedText);
 
                 for (int i = 0; i < collection.Websites.Length; i++)
                 {

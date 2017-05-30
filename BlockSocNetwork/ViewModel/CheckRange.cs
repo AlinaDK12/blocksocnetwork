@@ -8,7 +8,7 @@ namespace BlockSocNetwork
     public class CheckRange
     {
         const string path = "websites.json";
-        BlockWebsites sites = new BlockWebsites();
+        BlockWebsitesModel sites = new BlockWebsitesModel();
         private string name;
 
         public bool IsInRange(IPAddress _ip)
@@ -46,8 +46,8 @@ namespace BlockSocNetwork
            return false;
         }
 
-        //получаем все файлы из сайта
-        private BlockWebsites GetWebsites()
+        //получаем все сайты из файла
+        private BlockWebsitesModel GetWebsites()
         {
             string serializedText = "";
 
@@ -55,7 +55,7 @@ namespace BlockSocNetwork
             {
                 serializedText = sr.ReadToEnd();
             }
-            BlockWebsites newCollection = JsonConvert.DeserializeObject<BlockWebsites>(serializedText);
+            BlockWebsitesModel newCollection = JsonConvert.DeserializeObject<BlockWebsitesModel>(serializedText);
 
             return newCollection;
         }

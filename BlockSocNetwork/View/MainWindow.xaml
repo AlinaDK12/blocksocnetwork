@@ -10,7 +10,8 @@
         xmlns:local="clr-namespace:BlockSocNetwork"
         Loaded="Window_Loaded"
         Closing="Window_Closing"
-        Title="BlockSocNetwork" Height="530" Width="530" MinHeight="250" MinWidth="450" Icon="Block.ico">
+        Background="#e0e0e0"
+        Title="BlockSocNetwork" Height="500" Width="530" MinHeight="250" MinWidth="450" Icon="Block.ico">
     <Window.DataContext>
         <local:MainCode/>
     </Window.DataContext>
@@ -49,88 +50,144 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="ButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border" BorderThickness="1" BorderBrush="#cdcdcd" >
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Content" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#f2f2f2"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#e0e0e0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MenuStyle">
+            <Setter Property="Control.Background" Value="#676767"/>
+            <Setter Property="Control.Foreground" Value="#fefefe"/>
+            <Setter Property="Control.BorderThickness" Value="0"/>
+        </Style>
     </Window.Resources>
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="30" Height="*"/>
-            <RowDefinition MinHeight="30" Height="2*"/>
-            <RowDefinition MinHeight="380" Height="10*"/>
+            <RowDefinition MinHeight="30" Height="*"/>         
+            <RowDefinition MinHeight="390" Height="10*"/>
             <RowDefinition MinHeight="30" Height="2*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" FontSize="13" Height="25" VerticalAlignment="Top">
-            <MenuItem Header="Файл" >
-                <MenuItem Header="Настройка времени" Click="MenuItemTimeSetting_Click"/>
-                <MenuItem Header="Настройка сайтов" Click="MenuItemWebsitesSetting_Click"/>
-                <MenuItem Header="Статистика" Click="MenuItemStatistics_Click"/>
-                <Separator/>
-                <MenuItem Header="Выход" Click="MenuItemExit_Click"/>
+        <Menu Grid.Row="0" FontSize="13" Height="25" VerticalAlignment="Top" Style="{StaticResource MenuStyle}" >
+            <MenuItem Header="Файл" Style="{StaticResource MenuStyle}" Margin="3 3 0 0 ">
+                <MenuItem Header="Настройка времени" Click="MenuItemTimeSetting_Click" Style="{StaticResource MenuStyle}" />
+                <MenuItem Header="Настройка сайтов" Click="MenuItemWebsitesSetting_Click" Style="{StaticResource MenuStyle}"/>
+                <MenuItem Header="Статистика" Click="MenuItemStatistics_Click" Style="{StaticResource MenuStyle}"/>
+                <Separator Background="#fefefe" BorderThickness="0"/>
+                <MenuItem Header="Выход" Click="MenuItemExit_Click" Style="{StaticResource MenuStyle}"/>
             </MenuItem>
-            <MenuItem Header="Справка">
-                <MenuItem Header="Помощь">
-                    <MenuItem Header="Добавление сайтов" Click="MenuItemHelp_Click"/>
+            <MenuItem Header="Справка" Style="{StaticResource MenuStyle}" Margin="3 3 0 0 ">
+                <MenuItem Header="Помощь" Style="{StaticResource MenuStyle}">
+                    <MenuItem Header="Добавление сайтов" Click="MenuItemHelp_Click" Style="{StaticResource MenuStyle}"/>
                 </MenuItem>
-                <MenuItem Header="О программе" Click="MenuItemAboutProgram_Click"/>
+                <MenuItem Header="О программе" Click="MenuItemAboutProgram_Click" Style="{StaticResource MenuStyle}"/>
             </MenuItem>
         </Menu>
-        <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock TextWrapping="WrapWithOverflow" Text="Статус: "/>
-            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Path=Status}"/>
-        </WrapPanel>
-        <TabControl x:Name="TabControl" Grid.Row="2" MinHeight="380" Height="380"  MinWidth="500" Width="500" >
+        <TabControl x:Name="TabControl" Grid.Row="1" MinHeight="380" Height="380"  MinWidth="500" Width="500" Margin="5 5 5 0" Background="White">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1" BorderBrush="#e0e0e0" >
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="3"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#ffffff"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="#e0e0e0"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#ffffff"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
             <TabItem x:Name="TimeSetting" Header="Настройка времени">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition MinHeight="30" Height="*"/>
-                        <RowDefinition MinHeight="30" Height="*"/>
-                        <RowDefinition MinHeight="30" Height="*"/>
-                        <RowDefinition MinHeight="30" Height="*"/>
-                        <RowDefinition MinHeight="30" Height="*"/>
-                        <RowDefinition MinHeight="30" Height="*"/>
+                        <RowDefinition MinHeight="60" Height="2*"/>
+                        <RowDefinition MinHeight="60" Height="2*"/>
                         <RowDefinition MinHeight="30" Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="100" Width="*"/>
-                        <ColumnDefinition MinWidth="100" Width="*"/>
+                        <ColumnDefinition MinWidth="200" Width="2*"/>
                         <ColumnDefinition MinWidth="100" Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <CheckBox x:Name="CheckTime" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" VerticalAlignment="Center" Margin="20 0" Checked="checkboxTime_Checked" 
-                            Unchecked="checkboxTime_Unchecked" >
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="Блокировка с интервалами"/>
-                    </CheckBox>
-                    <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" VerticalAlignment="Center" Margin="20 0" >
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="Максимальное время * "/>
-                        <TextBox Width="60" Text="{Binding Path=MaxTime, Mode=TwoWay}"/>
-                        <TextBlock Text="  минут(ы)."/>
-                    </WrapPanel>
-                    <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" VerticalAlignment="Center" Margin="20 0">
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="Время интервала * "/>
-                        <TextBox Width="60" Text="{Binding Path=BlockTime, Mode=TwoWay}"/>
-                        <TextBlock Text="  минут(ы)."/>
-                    </WrapPanel>
-                    <CheckBox x:Name="CheckDayTime" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" VerticalAlignment="Center" Margin="20 0" Checked="checkboxDayTime_Checked"
-                  Unchecked="checkboxDayTime_Unchecked">
-                        <TextBlock Text="Блокировка на сутки"/>
-                    </CheckBox>
-                    <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" VerticalAlignment="Center" Margin="20 0">
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="Максимальное время в сутки * "/>
-                        <TextBox Width="60" Text="{Binding Path=MaxDayTime, Mode=TwoWay}"/>
-                        <TextBlock Text="  минут(ы)."/>
-                    </WrapPanel>
-                    <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0">
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="Время блокировки - до конца суток."/>
-                    </Label>
-                    <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20 5">
+                    <GroupBox Header="Блокировка с интервалами" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5 20 5 10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition MinHeight="20" Height="*"/>
+                                <RowDefinition MinHeight="20" Height="*"/>
+                                <RowDefinition MinHeight="20" Height="*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="CheckTime" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" 
+                                      Margin="20 5 0 0" Checked="checkboxTime_Checked" Unchecked="checkboxTime_Unchecked" >
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="Блокировка с интервалами"/>
+                            </CheckBox>
+                            <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center" Margin="20 0" >
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="Максимальное время активности без перерыва * "/>
+                                <TextBox Width="60" Text="{Binding Path=MaxTime, Mode=TwoWay}"/>
+                                <TextBlock Text="  (чч:мм:сс)."/>
+                            </WrapPanel>
+                            <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"
+                                       VerticalAlignment="Center" Margin="20 0 0 5">
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="Интервал блокировки * "/>
+                                <TextBox Width="60" Text="{Binding Path=BlockTime, Mode=TwoWay}"/>
+                                <TextBlock Text=" (чч:мм:сс)."/>
+                            </WrapPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Блокировка на сутки" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5 10 5 25">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition MinHeight="20" Height="*"/>
+                                <RowDefinition MinHeight="20" Height="*"/>
+                                <RowDefinition MinHeight="20" Height="*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="CheckDayTime" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" 
+                                      Margin="20 5 0 0" Checked="checkboxDayTime_Checked" Unchecked="checkboxDayTime_Unchecked">
+                                <TextBlock Text="Блокировка на сутки"/>
+                            </CheckBox>
+                            <WrapPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center" Margin="20 0">
+                                <TextBlock TextWrapping="WrapWithOverflow" Text="Максимальное время активности в сутки * "/>
+                                <TextBox Width="60" Text="{Binding Path=MaxDayTime, Mode=TwoWay}"/>
+                                <TextBlock Text="  (чч:мм:сс)."/>
+                            </WrapPanel>
+                            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                       Margin="20 0" TextWrapping="WrapWithOverflow" Text="Время блокировки - до конца суток."/>
+                        </Grid>
+                    </GroupBox>
+                    <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20 0 0 5">
                         <TextBlock FontSize="10" TextWrapping="WrapWithOverflow" Text="* Введите время в формате 00:00:00"/>
                     </Label>
-                    <Button Grid.Column="2" Grid.Row="6" Content="Изменить" Width="90" Height="30" Command="{Binding CommandChangeSetting}"
-                            HorizontalAlignment="Right" Margin="5"/>
+                    <Button Grid.Column="2" Grid.Row="3" Content="Изменить" Width="90" Height="30" Command="{Binding CommandChangeSetting}"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="8" Style="{StaticResource ButtonStyle}"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="WebsitesSetting" Header="Настройка сайтов">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition MinHeight="180" Height="*"/>
-                        <RowDefinition MinHeight="150" Height="*"/>
+                        <RowDefinition MinHeight="160" Height="*"/>
                     </Grid.RowDefinitions>
                     <GroupBox Header="Добавить новый сайт" Grid.Row="0">
                         <Grid>
@@ -153,20 +210,20 @@
                             <TextBox Grid.Column="1" Grid.Row="1" local:WaterMarkExtentions.WaterMark="255.255.255.255" Style="{StaticResource WaterMarkTextboxStyle}"
                              VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" Text="{Binding Path=NewIpDns}"/>
                             <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Диапазон IP-адресов сайта: "/>
-                            <TextBox Grid.Column="1" Grid.Row="2" local:WaterMarkExtentions.WaterMark="255.255.255.255 - 255.255.255.255" 
+                            <TextBox Grid.Column="1" Grid.Row="2" local:WaterMarkExtentions.WaterMark="0.0.0.0 - 255.255.255.255" 
                              Style="{StaticResource WaterMarkTextboxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200"
                              Text="{Binding Path=NewIpRange}"/>
                             <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Content="Добавить сайт" Width="100" Height="30"
-                                    Command="{Binding CommandAddSite}" HorizontalAlignment="Right" Margin="10 0"/>
+                                    Command="{Binding CommandAddSite}" HorizontalAlignment="Right" Margin="10 0" Style="{StaticResource ButtonStyle}"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Изменить список сайтов для блокировки" Grid.Row="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="4*"/>
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <DataGrid x:Name="GridWebsites" Grid.Row="0" Height="110" Width="280" ItemsSource="{Binding GridWebsites}" 
+                            <DataGrid x:Name="GridWebsites" Grid.Row="0" Height="105" Width="280" ItemsSource="{Binding GridWebsites}" 
                                       AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="10 5" HorizontalAlignment="Center">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn>
@@ -180,21 +237,25 @@
                                     <DataGridTextColumn Header="IP-адреса" Binding="{Binding RangeIP}"  />
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Button Grid.Row="1" Content="Изменить" Width="80" Height="30" Command="{Binding CommandChangeBlockSites}"/>
+                            <Button Grid.Row="1" Content="Изменить" Width="80" Height="30" Command="{Binding CommandChangeBlockSites}"
+                                    Style="{StaticResource ButtonStyle}" Margin="0"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem x:Name="Statistics" Header="Статистика">
-                <StackPanel>
+                <StackPanel Margin="2 10">
                     <WindowsFormsHost>
                         <dvc:Chart x:Name="chart"/>
                     </WindowsFormsHost>
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <WrapPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">
-            <TextBlock TextWrapping="WrapWithOverflow" Text="Количество перехваченных пакетов: "/>
+        <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 10">
+            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Path=Status}"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 10">
+            <TextBlock TextWrapping="WrapWithOverflow" Text="Перехваченные пакеты: "/>
             <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Path=Quantity}" />
         </WrapPanel>
     </Grid>

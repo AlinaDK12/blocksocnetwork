@@ -10,7 +10,7 @@ namespace BlockSocNetwork
         public void Write()
         {
             //вебсайты для блокировки по умолчанию
-            BlockWebsites collection = new BlockWebsites();
+            BlockWebsitesModel collection = new BlockWebsitesModel();
             collection.Websites = new Website[4];
             collection.Websites[0] = new Website()
             {
