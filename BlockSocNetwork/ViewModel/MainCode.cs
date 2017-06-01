@@ -62,6 +62,7 @@ namespace BlockSocNetwork
             if (!timerCheckDate.Enabled)
                 timerCheckDate.Start();
 
+           // Properties.Settings.Default.password = "";
         }
 
         //---------------------------КОМАНДЫ-----------------------------
