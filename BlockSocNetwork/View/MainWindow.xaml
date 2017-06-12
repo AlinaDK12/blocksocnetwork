@@ -204,7 +204,7 @@
                             <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="DNS-адрес: "/>
                             <TextBox Grid.Column="1" Grid.Row="0" local:WaterMarkExtentions.WaterMark="google.com" Style="{StaticResource WaterMarkTextboxStyle}"
                              VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" Text="{Binding Path=NewDomen}"/>
-                            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="IP-адрес DNS-сервера: " />
+                            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="IP-адрес: " />
                             <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="WrapWithOverflow" VerticalAlignment="Bottom"
                                HorizontalAlignment="Left" FontSize="9" Margin="0 2 5 0" Text="Если их несколько, введите через запятую." />
                             <TextBox Grid.Column="1" Grid.Row="1" local:WaterMarkExtentions.WaterMark="255.255.255.255" Style="{StaticResource WaterMarkTextboxStyle}"
@@ -247,6 +247,8 @@
                 <StackPanel Margin="2 10">
                     <TextBlock Name="TextStatisics" TextWrapping="WrapWithOverflow" Text="Статистика еще не собрана" HorizontalAlignment="Center" 
                                FontWeight="Bold" Visibility="Hidden"/>
+                    <TextBlock Name="ChartTitle" TextWrapping="WrapWithOverflow" Text="ГРАФИК АКТИВНОСТИ" HorizontalAlignment="Center" 
+                               VerticalAlignment="Top" Margin="0 5" FontWeight="SemiBold" />
                     <WindowsFormsHost>
                         <dvc:Chart x:Name="chart"/>
                     </WindowsFormsHost>

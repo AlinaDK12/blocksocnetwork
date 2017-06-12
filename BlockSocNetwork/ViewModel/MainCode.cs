@@ -280,12 +280,11 @@ namespace BlockSocNetwork
      
         //проверка IP и блокировка сайтов
         private void CheckIP (byte[] buf, int len)
-
         {
             IPHeader ipHeader = new IPHeader(buf, len);   
             if (!Properties.Settings.Default.isBlocked)
             {
-                if (checkRange.IsInRange(ipHeader.DestinationAddress) && (ipHeader.DestinationAddress.ToString() != "87.240.165.82"))
+                if (checkRange.IsInRange(ipHeader.DestinationAddress))
                 {
                     currentTime = TimeSpan.Parse(DateTime.Now.ToString().Split(' ')[1]);
                     if (startTime == TimeSpan.Parse("00:00:00"))
@@ -325,7 +324,6 @@ namespace BlockSocNetwork
                             statisticsWebsites.Add(statisticsWebsite);
                         }
 
-
                         //блокировка на сутки
                         if (isCheckedDayTime)
                         {
@@ -344,7 +342,7 @@ namespace BlockSocNetwork
                         if (difCurrPrevTime < maxDifCurrPrevTime && isCheckedTime)
                         {
                             difCurrStartTime = currentTime - startTime;
-                            if (difCurrStartTime > maxDifCurrStartTime)
+                            if (difCurrStartTime >= maxDifCurrStartTime)
                             {
                                 Status = "Социальные сети заблокированы";
 

@@ -54,6 +54,8 @@ namespace BlockSocNetwork
                 chart.ChartAreas.Add(new ChartArea("Graphics"));
                 chart.ChartAreas["Graphics"].AxisX.Title = "Дата";
                 chart.ChartAreas["Graphics"].AxisY.Title = "Время (мин)";
+                chart.ChartAreas["Graphics"].AxisX.MajorGrid.Enabled = false;
+                chart.ChartAreas["Graphics"].AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
 
                 foreach (var site in domainList)
                 {
@@ -68,7 +70,7 @@ namespace BlockSocNetwork
                         }
                     }
 
-                    datesList = statisticsList.Where(s => s.Name == site).Select(x => x.Date).Distinct();
+                    datesList = statisticsList.Where(s => s.Name == site).Select(x => x.Date.Split('.')[0] + "." + x.Date.Split('.')[1]).Distinct();
 
                     string[] xData = datesList.ToArray();
                     double[] yData = timeList.ToArray();
@@ -83,11 +85,13 @@ namespace BlockSocNetwork
                     chart.Legends.Add(site);
                     chart.Legends[site].Docking = Docking.Bottom;
                     chart.Legends[site].LegendStyle = LegendStyle.Table;
+                    chart.Legends[site].Alignment = System.Drawing.StringAlignment.Center;
                 }             
             }
            catch
             {
                 TextStatisics.Visibility = Visibility.Visible;
+                ChartTitle.Visibility = Visibility.Hidden;
             }
         }
 
